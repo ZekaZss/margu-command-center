@@ -1,73 +1,55 @@
-⚓ MARGU - Tactical Command Center
-Advanced IoT Radar Tracking & Command System
+# ⚓ MARGU - Advanced Command Center (V1.0)
 
-📌 Tentang Proyek
-MARGU Command Center adalah sebuah perangkat lunak sistem pelacakan radar real-time berbasis desktop (Windows) yang dirancang khusus untuk keperluan komando taktis dan keselamatan maritim.
+[![Security Protocol](https://img.shields.io/badge/Security-AES--256-brightgreen)](https://github.com/ZekaZss/margu-command-center)
+[![Framework](https://img.shields.io/badge/Backend-Laravel%2011-red)](https://laravel.com)
+[![Engine](https://img.shields.io/badge/Desktop-Tauri%20%2B%20Rust-orange)](https://tauri.app)
 
-Sistem ini berfungsi sebagai "Layar Monitor Utama" bagi pihak otoritas (seperti TNI AL atau Tim SAR) untuk memantau, melacak, dan merespons perangkat jam tangan pintar (IoT) yang digunakan oleh para nelayan saat melaut. MARGU menjembatani perangkat keras IoT di lapangan dengan pangkalan pusat melalui antarmuka radar yang sangat responsif, informatif, dan mengedepankan efisiensi operasional militer.
+MARGU Command Center adalah perangkat lunak taktis berbasis desktop yang dirancang khusus untuk memantau pergerakan kapal nelayan dan unit patroli secara *real-time*. Sistem ini mengintegrasikan pelacakan satelit dengan enkripsi keamanan berlapis guna mendeteksi ancaman di perairan secara instan.
 
-Teknologi yang Digunakan (Tech Stack):
+---
 
-Frontend: HTML5, CSS3, Vanilla JavaScript, Bootstrap 5, Leaflet.js (Radar Mapping).
+## 📥 LAUNCHER UNDUHAN RESMI (WINDOWS)
 
-Backend: Laravel 11 (PHP), MySQL Database, RESTful API.
+Silakan klik tautan di bawah ini untuk mengunduh berkas instalasi mandiri untuk sistem operasi Windows:
 
-Desktop Wrapper: Tauri Framework, Rust (Mengubah sistem web menjadi aplikasi .exe mandiri).
+### 🚀 [KLIK DI SINI UNTUK DOWNLOAD MARGU INSTALLER (.EXE)](PASTE_LINK_DOWNLOAD_YANG_KAMU_COPY_DISINI)
 
-✨ Fitur Utama
-Live GPS Tracking & Trace History: Memantau pergerakan kapal nelayan dan unit patroli secara real-time beserta garis jejak pergerakan terakhirnya.
+*(Catatan: Setelah mengunduh, cukup klik dua kali berkas `Margu_0.1.0_x64-setup.exe` untuk memulai proses instalasi otomatis di komputer Anda).*
 
-Critical SOS Emergency Alert: Sistem akan membunyikan alarm otomatis dan kamera radar akan mengunci lokasi nelayan yang menekan tombol SOS darurat di jam tangannya.
+---
 
-Undeclared Device Detection: Secara otomatis mendeteksi dan menandai sinyal GPS dari perangkat asing/ilegal yang tidak terdaftar di sistem.
+## 🔥 Fitur Unggulan Sistem
 
-Hardware Health Monitoring: Menampilkan status sisa baterai (🔋) dan kekuatan sinyal (📶) dari jam tangan IoT nelayan langsung dari layar radar.
+### 1. 🛰️ Live Radar Tracking & History Trace
+Memetakan koordinat garis lintang dan bujur secara *real-time* menggunakan Leaflet peta gelap interaktif. Dilengkapi garis putus-putus (*Trace History*) untuk melihat jalur pelayaran yang telah dilewati objek.
 
-Split-Directory Dashboard: Manajemen aset dua kolom yang memisahkan data armada militer (KRI) dengan armada sipil untuk keterbacaan tingkat tinggi.
+### 2. 🚨 Critical SOS Emergency Signal
+Apabila perangkat keras (*hardware*) di laut mengirimkan sinyal darurat, pangkalan pusat akan langsung membunyikan sirine bahaya otomatis, mengubah warna panel menjadi merah berkedip, dan melakukan *auto-focus* kamera radar ke lokasi kecelakaan.
 
-⚙️ Cara Menjalankan Sistem (Setup)
-Karena MARGU adalah aplikasi terpadu, sistem ini membutuhkan backend untuk menyala sebelum aplikasi radarnya dibuka.
+### 3. 🔐 API Gatekeeper Security
+Gerbang masuk data dari luar dilindungi penuh oleh token rahasia militer (`MARGU-SECURE-KEY-2026`). Setiap tembakan data dari perangkat tak dikenal yang tidak membawa token ini akan langsung diblokir otomatis oleh *firewall server*.
 
-Pastikan Laragon (atau server lokal sejenis) sudah berjalan (Apache & MySQL aktif).
+### 4. 📋 Split-Directory Dashboard
+Manajemen antarmuka pintar dua kolom terpisah:
+* **Kolom Kiri:** Memantau pergerakan unit patroli militer resmi (KRI TNI AL).
+* **Kolom Kanan:** Memantau aktivitas kapal sipil dan mendeteksi adanya sinyal pemancar asing ilegal (*Undeclared/Alien Target*).
 
-Buka terminal di dalam folder proyek ini.
+---
 
-Bersihkan database untuk simulasi baru (opsional): php artisan migrate:fresh
+## 🛠️ Arsitektur Teknologi
 
-Nyalakan mesin backend API: php artisan serve
+Sistem dikembangkan dengan kombinasi performa tinggi dan keamanan tingkat rendah (*low-level*):
+* **Core Engine:** Rust (Tauri Desktop Environment) - Menjamin aplikasi super ringan dan kebal injeksi memori.
+* **Brain Center:** PHP 8.x + Laravel 11 - Mengelola database, lalu lintas API, dan enkripsi token.
+* **Database Engine:** MySQL - Menyimpan data log koordinat dan riwayat kapal.
+* **Frontend HUD:** Bootstrap 5 + Leaflet.js (Aesthetic Cyberpunk Dark Mode).
 
-Buka terminal baru, dan luncurkan aplikasi desktop MARGU: npx tauri dev (Aplikasi akan terbuka otomatis).
+---
 
-📖 Panduan Penggunaan Langkah demi Langkah
-Langkah 1: Registrasi Perangkat (Bind Device)
-Sebelum alat digunakan di laut, petugas harus mendaftarkannya terlebih dahulu.
+## ⚙️ Petunjuk Pengoperasian Server Lokal
 
-Klik menu ⚙️ BIND DEVICE di pojok kiri bawah.
+Jika Anda ingin menjalankan pangkalan pusat dari kode mentah, ikuti urutan perintah berikut:
 
-Masukkan Kode Perangkat / Serial Number (contoh: MARGU-NEL-001).
-
-Tentukan lokasi koordinat awal pembagian alat (Latitude & Longitude).
-
-Pilih status awal alat (OFFLINE, SECURE, atau PATROL).
-
-Klik tombol BIND DEVICE untuk menyimpan ke database. Titik akan langsung muncul di radar.
-
-Langkah 2: Pemantauan Radar (Live Tracking)
-
-Saat perangkat IoT mulai mengirimkan koordinat baru ke database, titik di radar MARGU akan bergerak secara otomatis.
-
-Arahkan kursor (Hover) ke titik mana pun di peta untuk memunculkan kotak informasi holografik berisi detail perangkat, status alat, sisa baterai, dan sinyal.
-
-Jika titik bergerak, radar akan menggambar garis putus-putus di belakangnya sebagai jejak sejarah pelayaran (Movement Traces).
-
-Langkah 3: Simulasi Sistem Darurat (SOS & Alien Signal)
-
-Sinyal SOS: Jika sebuah alat mengubah statusnya menjadi "SOS", radar akan membunyikan sirine dan indikator merah akan berkedip. Klik tombol 🚨 Emergency Alerts di menu kiri, maka kamera akan langsung melakukan zoom-in secara otomatis ke lokasi korban tanpa harus dicari manual.
-
-Perangkat Asing: Untuk menguji respons keamanan, klik tombol ⚠️ TEST ALIEN SIGNAL. Sistem akan memunculkan titik berwarna kuning (UNKNOWN) yang menandakan ada sinyal jam yang masuk ke radar tapi nomor serinya ilegal/tidak terdaftar.
-
-Langkah 4: Manajemen Direktori & Alarm
-
-Jika alarm SOS berbunyi, operator dapat mematikannya (Mute) dengan mengklik tombol 🔊 ALARM SYSTEM: ARMED di pojok kiri bawah.
-
-Klik menu 📋 Device Directory untuk membuka panel layar penuh. Operator dapat melihat daftar lengkap semua kapal militer dan nelayan sipil beserta kondisi baterai dan statusnya yang diperbarui setiap 3 detik.
+1. **Aktifkan Server Utama & Database:**
+   ```bash
+   php artisan serve
