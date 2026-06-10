@@ -1,58 +1,73 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+⚓ MARGU - Tactical Command Center
+Advanced IoT Radar Tracking & Command System
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+📌 Tentang Proyek
+MARGU Command Center adalah sebuah perangkat lunak sistem pelacakan radar real-time berbasis desktop (Windows) yang dirancang khusus untuk keperluan komando taktis dan keselamatan maritim.
 
-## About Laravel
+Sistem ini berfungsi sebagai "Layar Monitor Utama" bagi pihak otoritas (seperti TNI AL atau Tim SAR) untuk memantau, melacak, dan merespons perangkat jam tangan pintar (IoT) yang digunakan oleh para nelayan saat melaut. MARGU menjembatani perangkat keras IoT di lapangan dengan pangkalan pusat melalui antarmuka radar yang sangat responsif, informatif, dan mengedepankan efisiensi operasional militer.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Teknologi yang Digunakan (Tech Stack):
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Frontend: HTML5, CSS3, Vanilla JavaScript, Bootstrap 5, Leaflet.js (Radar Mapping).
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Backend: Laravel 11 (PHP), MySQL Database, RESTful API.
 
-## Learning Laravel
+Desktop Wrapper: Tauri Framework, Rust (Mengubah sistem web menjadi aplikasi .exe mandiri).
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+✨ Fitur Utama
+Live GPS Tracking & Trace History: Memantau pergerakan kapal nelayan dan unit patroli secara real-time beserta garis jejak pergerakan terakhirnya.
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Critical SOS Emergency Alert: Sistem akan membunyikan alarm otomatis dan kamera radar akan mengunci lokasi nelayan yang menekan tombol SOS darurat di jam tangannya.
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+Undeclared Device Detection: Secara otomatis mendeteksi dan menandai sinyal GPS dari perangkat asing/ilegal yang tidak terdaftar di sistem.
 
-## Agentic Development
+Hardware Health Monitoring: Menampilkan status sisa baterai (🔋) dan kekuatan sinyal (📶) dari jam tangan IoT nelayan langsung dari layar radar.
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+Split-Directory Dashboard: Manajemen aset dua kolom yang memisahkan data armada militer (KRI) dengan armada sipil untuk keterbacaan tingkat tinggi.
 
-```bash
-composer require laravel/boost --dev
+⚙️ Cara Menjalankan Sistem (Setup)
+Karena MARGU adalah aplikasi terpadu, sistem ini membutuhkan backend untuk menyala sebelum aplikasi radarnya dibuka.
 
-php artisan boost:install
-```
+Pastikan Laragon (atau server lokal sejenis) sudah berjalan (Apache & MySQL aktif).
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+Buka terminal di dalam folder proyek ini.
 
-## Contributing
+Bersihkan database untuk simulasi baru (opsional): php artisan migrate:fresh
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Nyalakan mesin backend API: php artisan serve
 
-## Code of Conduct
+Buka terminal baru, dan luncurkan aplikasi desktop MARGU: npx tauri dev (Aplikasi akan terbuka otomatis).
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+📖 Panduan Penggunaan Langkah demi Langkah
+Langkah 1: Registrasi Perangkat (Bind Device)
+Sebelum alat digunakan di laut, petugas harus mendaftarkannya terlebih dahulu.
 
-## Security Vulnerabilities
+Klik menu ⚙️ BIND DEVICE di pojok kiri bawah.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Masukkan Kode Perangkat / Serial Number (contoh: MARGU-NEL-001).
 
-## License
+Tentukan lokasi koordinat awal pembagian alat (Latitude & Longitude).
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Pilih status awal alat (OFFLINE, SECURE, atau PATROL).
+
+Klik tombol BIND DEVICE untuk menyimpan ke database. Titik akan langsung muncul di radar.
+
+Langkah 2: Pemantauan Radar (Live Tracking)
+
+Saat perangkat IoT mulai mengirimkan koordinat baru ke database, titik di radar MARGU akan bergerak secara otomatis.
+
+Arahkan kursor (Hover) ke titik mana pun di peta untuk memunculkan kotak informasi holografik berisi detail perangkat, status alat, sisa baterai, dan sinyal.
+
+Jika titik bergerak, radar akan menggambar garis putus-putus di belakangnya sebagai jejak sejarah pelayaran (Movement Traces).
+
+Langkah 3: Simulasi Sistem Darurat (SOS & Alien Signal)
+
+Sinyal SOS: Jika sebuah alat mengubah statusnya menjadi "SOS", radar akan membunyikan sirine dan indikator merah akan berkedip. Klik tombol 🚨 Emergency Alerts di menu kiri, maka kamera akan langsung melakukan zoom-in secara otomatis ke lokasi korban tanpa harus dicari manual.
+
+Perangkat Asing: Untuk menguji respons keamanan, klik tombol ⚠️ TEST ALIEN SIGNAL. Sistem akan memunculkan titik berwarna kuning (UNKNOWN) yang menandakan ada sinyal jam yang masuk ke radar tapi nomor serinya ilegal/tidak terdaftar.
+
+Langkah 4: Manajemen Direktori & Alarm
+
+Jika alarm SOS berbunyi, operator dapat mematikannya (Mute) dengan mengklik tombol 🔊 ALARM SYSTEM: ARMED di pojok kiri bawah.
+
+Klik menu 📋 Device Directory untuk membuka panel layar penuh. Operator dapat melihat daftar lengkap semua kapal militer dan nelayan sipil beserta kondisi baterai dan statusnya yang diperbarui setiap 3 detik.
