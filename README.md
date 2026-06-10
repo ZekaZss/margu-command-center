@@ -12,7 +12,7 @@ MARGU Command Center adalah perangkat lunak taktis berbasis desktop yang diranca
 
 Silakan klik tautan di bawah ini untuk mengunduh berkas instalasi mandiri untuk sistem operasi Windows:
 
-### 🚀 [KLIK DI SINI UNTUK DOWNLOAD MARGU INSTALLER (.EXE)](PASTE_LINK_DOWNLOAD_YANG_KAMU_COPY_DISINI)
+### 🚀 [KLIK DI SINI UNTUK DOWNLOAD MARGU INSTALLER (.EXE)] https://github.com/ZekaZss/margu-command-center/releases/tag/v1.0.0
 
 *(Catatan: Setelah mengunduh, cukup klik dua kali berkas `Margu_0.1.0_x64-setup.exe` untuk memulai proses instalasi otomatis di komputer Anda).*
 
@@ -53,3 +53,5 @@ Jika Anda ingin menjalankan pangkalan pusat dari kode mentah, ikuti urutan perin
 1. **Aktifkan Server Utama & Database:**
    ```bash
    php artisan serve
+
+Developed by Dima Anggara (Bang Zachery) - All Systems Operational.
