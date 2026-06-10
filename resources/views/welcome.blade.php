@@ -18,9 +18,7 @@
 
         body { background-color: #050b14; color: #38bdf8; font-family: 'Rajdhani', sans-serif; margin: 0; overflow: hidden; }
         
-        /* ========================================= */
-        /* STARTUP LOADING SCREEN (FITUR BARU)       */
-        /* ========================================= */
+        /* STARTUP LOADING SCREEN */
         #startup-loader { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #050b14; z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 0.8s ease-out, visibility 0.8s; }
         .radar-spinner { width: 80px; height: 80px; border: 4px solid rgba(56, 189, 248, 0.1); border-top-color: #38bdf8; border-bottom-color: #38bdf8; border-radius: 50%; animation: spin 1.2s cubic-bezier(0.5, 0.1, 0.5, 0.9) infinite; }
         .loader-text { margin-top: 25px; color: #38bdf8; font-weight: 700; letter-spacing: 4px; font-size: 1.2rem; animation: text-pulse 1.5s infinite; text-shadow: 0 0 10px rgba(56, 189, 248, 0.5); }
@@ -114,6 +112,8 @@
     <button id="btn-directory" class="nav-btn" data-bs-toggle="modal" data-bs-target="#directoryModal">📋 Device Directory</button>
     <button id="btn-analytics" class="nav-btn" data-bs-toggle="modal" data-bs-target="#analyticsModal">📊 System Analytics</button>
     
+    <button class="nav-btn mt-4 text-warning" onclick="simulateUnknownDevice()" style="border-top: 1px dashed #f59e0b;">⚠️ TEST ALIEN SIGNAL</button>
+    
     <button class="nav-btn mt-auto" data-bs-toggle="modal" data-bs-target="#registerModal" style="border-top: 1px solid rgba(56, 189, 248, 0.3); color: #fff;">⚙️ BIND DEVICE</button>
 </div>
 
@@ -185,7 +185,7 @@
                                 </tr>
                             </thead>
                             <tbody id="dir-patrol-list">
-                                </tbody>
+                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -204,7 +204,7 @@
                                 </tr>
                             </thead>
                             <tbody id="dir-device-list">
-                                </tbody>
+                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -273,13 +273,33 @@
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
 <script>
+    // =====================================================================
+    // FUNGSI SIMULASI ALIEN SIGNAL (DENGAN PENAMBAHAN API TOKEN KEAMANAN)
+    // =====================================================================
+    function simulateUnknownDevice() {
+        fetch('/api/hardware/ping', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
+            body: JSON.stringify({ 
+                api_token: 'MARGU-SECURE-KEY-2026', // <-- INI ADALAH PENAMBAHAN TOKEN KEAMANANNYA
+                device_code: 'ALIEN-X99', 
+                latitude: 1.150, 
+                longitude: 104.120 
+            })
+        }).then(res => res.json()).then(data => {
+            if(!data.success) {
+                showSystemMessage(data.message, "🛑"); // Menampilkan pesan error jika token salah
+            }
+        });
+    }
+
     // FUNGSI PENGHILANG LOADING SCREEN
     window.addEventListener('load', function() {
         setTimeout(function() {
             let loader = document.getElementById('startup-loader');
             loader.style.opacity = '0';
             setTimeout(() => { loader.style.visibility = 'hidden'; }, 800);
-        }, 2200); // Tampil 2.2 detik untuk efek booting estetis
+        }, 2200); 
     });
 
     function showSystemMessage(message, iconHtml = '⚠️') {
@@ -352,7 +372,6 @@
                     let deviceListHTML = "";
 
                     vessels.forEach(function(vessel) {
-                        // ==== LOGIKA PENGISIAN BARIS TABEL ====
                         if (vessel.status !== 'OFFLINE') {
                             let statusBadge = "";
                             
@@ -373,7 +392,6 @@
                             else { deviceListHTML += rowHTML; }
                         }
 
-                        // ==== LOGIKA PENGGAMBARAN PETA ====
                         if (vessel.status === 'OFFLINE') return;
                         let lat = parseFloat(vessel.latitude);
                         let lng = parseFloat(vessel.longitude);
@@ -439,7 +457,6 @@
                         }
                     });
 
-                    // Update UI Lists (Kondisi Kosong jika tidak ada tabel)
                     if(patrolListHTML === "") patrolListHTML = '<tr><td colspan="3" class="text-center text-secondary py-4">TIDAK ADA UNIT PATROLI AKTIF</td></tr>';
                     if(deviceListHTML === "") deviceListHTML = '<tr><td colspan="3" class="text-center text-secondary py-4">TIDAK ADA TARGET TERDETEKSI</td></tr>';
                     
