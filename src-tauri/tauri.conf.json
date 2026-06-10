@@ -2,9 +2,9 @@
   "$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
   "productName": "Margu",
   "version": "0.1.0",
-  "identifier": "com.tauri.dev",
+  "identifier": "com.margu.tactical",
   "build": {
-    "frontendDist": "../public",
+    "frontendDist": "https://cookie-bio-creative-inquiries.trycloudflare.com",
     "devUrl": "http://127.0.0.1:8000"
   },
   "app": {
